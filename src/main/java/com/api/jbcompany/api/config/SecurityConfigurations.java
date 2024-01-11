@@ -27,9 +27,9 @@ public class SecurityConfigurations {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.GET, "/vagas").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/logar").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/cadastrar").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/vagas").permitAll()
                         .requestMatchers(HttpMethod.POST, "/aulas").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
