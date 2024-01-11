@@ -42,13 +42,12 @@ public class VagasController {
 
         Usuarios usuario = usuariosService.encontrarUsuarioPorEmail(auth.getName());
 
-        if (usuario != null) {
-            vaga.setEmpresas(usuario);
-            Vagas novaVaga = vagasService.cadastrarVagas(vaga);
-            return ResponseEntity.status(HttpStatus.CREATED).body(novaVaga);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        vaga.setEmpresas(usuario);
+
+        Vagas vagaCadastrada = vagasService.cadastrarVagas(vaga);
+
+        return ResponseEntity.ok(vaga);
+
     }
 
     @GetMapping("/{id}")
