@@ -50,7 +50,9 @@ public class UsuarioController {
 
     @PostMapping("/cadastrar")
     public ResponseEntity<Usuarios> cadastrarUsuario(@RequestBody RegistroUsuarioDTO data) {
-        if (this.usuariosRepository.findByEmail(data.email()) != null) {
+        Usuarios usuarioExistente = usuariosRepository.findByEmail(data.email());
+
+        if (usuarioExistente != null) {
             return ResponseEntity.badRequest().build();
         }
         String senhaCriptografada = new BCryptPasswordEncoder().encode(data.senha());
