@@ -12,6 +12,8 @@ import com.api.jbcompany.api.service.CursosService;
 
 @RestController
 @RequestMapping("/cursos")
+@CrossOrigin(origins = "http://localhost:3000")
+
 public class CursosController {
 
     @Autowired
