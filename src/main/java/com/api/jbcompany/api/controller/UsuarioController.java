@@ -21,6 +21,7 @@ import com.api.jbcompany.api.service.TokenService;
 
 @RestController
 @RequestMapping("auth")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UsuarioController {
 
     @Autowired

@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/candidaturas")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CandidaturasController {
 
     @Autowired
