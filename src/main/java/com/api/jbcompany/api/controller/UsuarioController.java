@@ -22,7 +22,6 @@ import com.api.jbcompany.api.service.TokenService;
 
 @RestController
 @RequestMapping("auth")
-@CrossOrigin(origins = "http://localhost:3000")
 public class UsuarioController {
 
     @Autowired
@@ -34,6 +33,7 @@ public class UsuarioController {
     @Autowired
     private UsuariosRepository usuariosRepository;
 
+    @CrossOrigin
     @PostMapping("/logar")
     public ResponseEntity<?> logar(@RequestBody UsuarioDTO data) {
         var usuario = new UsernamePasswordAuthenticationToken(data.email(),
@@ -48,6 +48,7 @@ public class UsuarioController {
 
     }
 
+    @CrossOrigin
     @PostMapping("/cadastrar")
     public ResponseEntity<Usuarios> cadastrarUsuario(@RequestBody RegistroUsuarioDTO data) {
         Usuarios usuarioExistente = usuariosRepository.findByEmail(data.email());

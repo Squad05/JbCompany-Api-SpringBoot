@@ -19,7 +19,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/vagas")
-@CrossOrigin(origins = "http://localhost:3000")
 public class VagasController {
 
     @Autowired
@@ -31,12 +30,14 @@ public class VagasController {
     @Autowired
     private VagasService vagasService;
 
+    @CrossOrigin
     @GetMapping
     public ResponseEntity<List<Vagas>> listarVagas() {
         List<Vagas> vagas = vagasService.listarVagas();
         return ResponseEntity.ok(vagas);
     }
 
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<?> cadastrarVagas(@RequestBody Vagas vaga) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -51,6 +52,7 @@ public class VagasController {
 
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Vagas> pegarVagasPorId(@PathVariable Long id) {
         try {
