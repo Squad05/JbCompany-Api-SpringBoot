@@ -53,7 +53,7 @@ public class UsuarioController {
         Usuarios usuarioExistente = usuariosRepository.findByEmail(data.email());
 
         if (usuarioExistente != null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
         String senhaCriptografada = new BCryptPasswordEncoder().encode(data.senha());
         Usuarios novoUsuario = new Usuarios(data.nome(), data.email(), senhaCriptografada, data.cargo());
