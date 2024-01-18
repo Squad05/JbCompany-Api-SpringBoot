@@ -15,4 +15,6 @@ public interface VagasService {
 
     Vagas pegarVagasPorId(Long id);
 
+    List<Vagas> listarVagasPorEmpresa(Long idEmpresa);
+
 }

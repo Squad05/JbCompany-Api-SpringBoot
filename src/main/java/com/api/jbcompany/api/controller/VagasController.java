@@ -1,21 +1,20 @@
 package com.api.jbcompany.api.controller;
 
+import com.api.jbcompany.api.dto.VagasDTOExibicao;
+import com.api.jbcompany.api.dto.VagasDTOExibicaoComEmpresa;
 import com.api.jbcompany.api.model.Usuarios;
 import com.api.jbcompany.api.model.Vagas;
-import com.api.jbcompany.api.repository.UsuariosRepository;
 import com.api.jbcompany.api.service.AuthorizationService;
 import com.api.jbcompany.api.service.UsuariosService;
 import com.api.jbcompany.api.service.VagasService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/vagas")
@@ -32,14 +31,20 @@ public class VagasController {
 
     @CrossOrigin
     @GetMapping
-    public ResponseEntity<List<Vagas>> listarVagas() {
+    public ResponseEntity<List<VagasDTOExibicaoComEmpresa>> listarVagas() {
         List<Vagas> vagas = vagasService.listarVagas();
-        return ResponseEntity.ok(vagas);
+
+        List<VagasDTOExibicaoComEmpresa> listaVagasExibicao = vagas.stream()
+                .map(vaga -> new VagasDTOExibicaoComEmpresa(vaga.getId(), vaga.getEmpresas().getNome(),
+                        vaga.getDescricao(), vaga.getLocalizacao(), vaga.getFuncao(), vaga.getSalario()))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(listaVagasExibicao);
     }
 
     @CrossOrigin
     @PostMapping
-    public ResponseEntity<?> cadastrarVagas(@RequestBody Vagas vaga) {
+    public ResponseEntity<VagasDTOExibicao> cadastrarVagas(@RequestBody Vagas vaga) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         Usuarios usuario = usuariosService.encontrarUsuarioPorEmail(auth.getName());
@@ -48,31 +53,45 @@ public class VagasController {
 
         Vagas vagaCadastrada = vagasService.cadastrarVagas(vaga);
 
-        return ResponseEntity.ok(vaga);
+        VagasDTOExibicao exibirVaga = new VagasDTOExibicao(vagaCadastrada.getId(), vagaCadastrada.getDescricao(),
+                vagaCadastrada.getLocalizacao(), vagaCadastrada.getFuncao(), vagaCadastrada.getSalario());
+
+        return ResponseEntity.ok(exibirVaga);
 
     }
 
     @CrossOrigin
     @GetMapping("/{id}")
-    public ResponseEntity<Vagas> pegarVagasPorId(@PathVariable Long id) {
+    public ResponseEntity<VagasDTOExibicaoComEmpresa> pegarVagasPorId(@PathVariable Long id) {
         try {
             Vagas vaga = vagasService.pegarVagasPorId(id);
-            return ResponseEntity.ok(vaga);
+            VagasDTOExibicaoComEmpresa vagaExibir = new VagasDTOExibicaoComEmpresa(vaga.getId(),
+                    vaga.getEmpresas().getNome(),
+                    vaga.getDescricao(),
+                    vaga.getLocalizacao(), vaga.getFuncao(), vaga.getSalario());
+
+            return ResponseEntity.ok(vagaExibir);
         } catch (RuntimeException ex) {
             return ResponseEntity.notFound().build();
         }
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
-    public ResponseEntity<Vagas> atualizarVagas(@PathVariable Long id, @RequestBody Vagas vaga) {
+    public ResponseEntity<VagasDTOExibicao> atualizarVagas(@PathVariable Long id, @RequestBody Vagas vaga) {
         try {
             Vagas vagaAtualizada = vagasService.atualizarVagas(id, vaga);
-            return ResponseEntity.ok(vagaAtualizada);
+
+            VagasDTOExibicao vagaExibicao = new VagasDTOExibicao(vagaAtualizada.getId(), vagaAtualizada.getDescricao(),
+                    vagaAtualizada.getLocalizacao(), vagaAtualizada.getFuncao(), vagaAtualizada.getSalario());
+
+            return ResponseEntity.ok(vagaExibicao);
         } catch (RuntimeException ex) {
             return ResponseEntity.notFound().build();
         }
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarVagas(@PathVariable Long id) {
         try {
@@ -82,4 +101,29 @@ public class VagasController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @CrossOrigin
+    @GetMapping("/listar/{id}")
+    public ResponseEntity<List<VagasDTOExibicao>> listarVagasPorEmpresa(Long empresas) {
+        try {
+
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+            Usuarios usuario = usuariosService.encontrarUsuarioPorEmail(auth.getName());
+
+            List<Vagas> vagasPorEmpresa = vagasService.listarVagasPorEmpresa(usuario.getId());
+
+            List<VagasDTOExibicao> listaVagas = vagasPorEmpresa.stream()
+                    .map(vaga -> new VagasDTOExibicao(vaga.getId(), vaga.getDescricao(), vaga.getLocalizacao(),
+                            vaga.getFuncao(),
+                            vaga.getSalario()))
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok().body(listaVagas);
+
+        } catch (RuntimeException ex) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.api.jbcompany.api.model.Usuarios;
 import com.api.jbcompany.api.model.Vagas;
 import com.api.jbcompany.api.repository.VagasRepository;
 import com.api.jbcompany.api.service.VagasService;
@@ -58,5 +59,13 @@ public class VagasServiceImpl implements VagasService {
     public Vagas pegarVagasPorId(Long id) {
         return vagasRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Vaga com ID " + id + " não encontrada."));
+    }
+
+    @Override
+    public List<Vagas> listarVagasPorEmpresa(Long idEmpresa) {
+        Usuarios empresa = new Usuarios();
+        empresa.setId(idEmpresa);
+
+        return vagasRepository.findByEmpresas(empresa);
     }
 }
