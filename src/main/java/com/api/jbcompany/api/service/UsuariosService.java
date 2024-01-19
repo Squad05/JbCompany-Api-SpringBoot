@@ -1,6 +1,7 @@
 package com.api.jbcompany.api.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +21,12 @@ public class UsuariosService {
     private UsuariosRepository usuariosRepository;
 
     public Usuarios encontrarUsuarioPorEmail(String email) {
+
         return usuariosRepository.findByEmail(email);
+    }
+
+    public Optional<Usuarios> encontrarUsuarioPorId(Long id) {
+        return usuariosRepository.findById(id);
     }
 
 }

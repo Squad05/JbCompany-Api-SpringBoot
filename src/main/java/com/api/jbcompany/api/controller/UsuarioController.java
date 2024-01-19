@@ -5,20 +5,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.jbcompany.api.dto.LoginResponseDTO;
 import com.api.jbcompany.api.dto.RegistroUsuarioDTO;
+import com.api.jbcompany.api.dto.UsuarioAtualizadoDTO;
 import com.api.jbcompany.api.dto.UsuarioDTO;
+import com.api.jbcompany.api.dto.UsuarioExibicaoDTO;
 import com.api.jbcompany.api.model.Usuarios;
 import com.api.jbcompany.api.repository.UsuariosRepository;
 import com.api.jbcompany.api.service.TokenService;
+import com.api.jbcompany.api.service.UsuariosService;
 
 @RestController
 @RequestMapping("auth")
@@ -32,6 +39,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuariosRepository usuariosRepository;
+
+    @Autowired
+    private UsuariosService usuariosService;
 
     @CrossOrigin
     @PostMapping("/logar")
@@ -62,4 +72,49 @@ public class UsuarioController {
         return ResponseEntity.ok().body(novoUsuario);
     }
 
+    @CrossOrigin
+    @GetMapping("/detalhes")
+    public ResponseEntity<UsuarioExibicaoDTO> exibirDetalhesUsuario() {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        Usuarios usuarioLogado = usuariosService.encontrarUsuarioPorEmail(auth.getName());
+
+        UsuarioExibicaoDTO detalhesUsuario = new UsuarioExibicaoDTO(usuarioLogado.getId(), usuarioLogado.getNome(),
+                usuarioLogado.getEmail(), usuarioLogado.getTelefone(), usuarioLogado.getArea_de_atuacao(),
+                usuarioLogado.getDescricao());
+
+        return ResponseEntity.ok().body(detalhesUsuario);
+
+    }
+
+    @CrossOrigin
+    @PutMapping("/editar")
+    public ResponseEntity<UsuarioAtualizadoDTO> editarUsuario(
+            @RequestBody UsuarioAtualizadoDTO data) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        Usuarios usuarioExistente = usuariosService.encontrarUsuarioPorEmail(auth.getName());
+
+        if (usuarioExistente == null) {
+            return ResponseEntity.notFound().build();
+
+        }
+
+        Usuarios usuario = usuarioExistente;
+
+        usuario.setNome(data.nome());
+        usuario.setArea_de_atuacao(data.area_de_atuacao());
+        usuario.setDescricao(data.descricao());
+
+        String senhaCriptografada = new BCryptPasswordEncoder().encode(data.senha());
+
+        usuario.setSenha(senhaCriptografada);
+        usuario.setTelefone(data.telefone());
+
+        this.usuariosRepository.save(usuario);
+
+        return ResponseEntity.ok().build();
+
+    }
 }
