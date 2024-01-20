@@ -4,23 +4,26 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Cursos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "empresa_id")
+    private Usuarios empresas;
+
     private String materia;
     private String duracao;
     private String descricao;
 
-    public Cursos() {
-
-    }
-
-    public Cursos(Long id, String materia, String duracao, String descricao) {
+    public Cursos(Long id, Usuarios empresas, String materia, String duracao, String descricao) {
         this.id = id;
+        this.empresas = empresas;
         this.materia = materia;
         this.duracao = duracao;
         this.descricao = descricao;
@@ -32,6 +35,14 @@ public class Cursos {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Usuarios getEmpresas() {
+        return empresas;
+    }
+
+    public void setEmpresas(Usuarios empresas) {
+        this.empresas = empresas;
     }
 
     public String getMateria() {
@@ -57,4 +68,9 @@ public class Cursos {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public Cursos() {
+
+    }
+
 }

@@ -31,6 +31,7 @@ public class AulasController {
     @PostMapping
     public ResponseEntity<Aulas> cadastrarAula(@RequestBody Aulas aula) {
         Aulas novaAula = aulasService.cadastrarAula(aula);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(novaAula);
     }
 

@@ -15,4 +15,6 @@ public interface CursosService {
 
     Cursos pegarCursoPorId(Long id);
 
+    List<Cursos> listarCursosPorEmpresa(Long idEmpresa);
+
 }

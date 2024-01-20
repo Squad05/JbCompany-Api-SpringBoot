@@ -54,6 +54,7 @@ public class VagasController {
         Vagas vagaCadastrada = vagasService.cadastrarVagas(vaga);
 
         VagasDTOExibicao exibirVaga = new VagasDTOExibicao(vagaCadastrada.getId(), vagaCadastrada.getDescricao(),
+                vaga.getCep(),
                 vagaCadastrada.getLocalizacao(), vagaCadastrada.getFuncao(), vagaCadastrada.getSalario());
 
         return ResponseEntity.ok(exibirVaga);
@@ -83,6 +84,7 @@ public class VagasController {
             Vagas vagaAtualizada = vagasService.atualizarVagas(id, vaga);
 
             VagasDTOExibicao vagaExibicao = new VagasDTOExibicao(vagaAtualizada.getId(), vagaAtualizada.getDescricao(),
+                    vagaAtualizada.getCep(),
                     vagaAtualizada.getLocalizacao(), vagaAtualizada.getFuncao(), vagaAtualizada.getSalario());
 
             return ResponseEntity.ok(vagaExibicao);
@@ -114,7 +116,8 @@ public class VagasController {
             List<Vagas> vagasPorEmpresa = vagasService.listarVagasPorEmpresa(usuario.getId());
 
             List<VagasDTOExibicao> listaVagas = vagasPorEmpresa.stream()
-                    .map(vaga -> new VagasDTOExibicao(vaga.getId(), vaga.getDescricao(), vaga.getLocalizacao(),
+                    .map(vaga -> new VagasDTOExibicao(vaga.getId(), vaga.getDescricao(), vaga.getCep(),
+                            vaga.getLocalizacao(),
                             vaga.getFuncao(),
                             vaga.getSalario()))
                     .collect(Collectors.toList());

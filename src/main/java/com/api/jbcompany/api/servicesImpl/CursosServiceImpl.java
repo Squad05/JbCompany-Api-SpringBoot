@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.api.jbcompany.api.model.Cursos;
+import com.api.jbcompany.api.model.Usuarios;
 import com.api.jbcompany.api.repository.CursosRepository;
 import com.api.jbcompany.api.service.CursosService;
 
@@ -55,5 +56,14 @@ public class CursosServiceImpl implements CursosService {
                 () -> {
                     throw new RuntimeException("Curso com ID " + id + " não encontrado para exclusão.");
                 });
+    }
+
+    @Override
+    public List<Cursos> listarCursosPorEmpresa(Long idEmpresa) {
+        Usuarios empresa = new Usuarios();
+
+        empresa.setId(idEmpresa);
+        return cursosRepository.findByEmpresas(empresa);
+
     }
 }
