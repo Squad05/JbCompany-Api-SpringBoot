@@ -16,18 +16,21 @@ public class AulasController {
     @Autowired
     private AulasService aulasService;
 
+    @CrossOrigin
     @GetMapping
     public ResponseEntity<List<Aulas>> listarAulas() {
         List<Aulas> aulas = aulasService.listarAulas();
         return ResponseEntity.ok(aulas);
     }
 
+    @CrossOrigin
     @GetMapping("/curso/{cursoId}")
     public ResponseEntity<List<Aulas>> listarAulasPorCursoId(@PathVariable Long cursoId) {
         List<Aulas> aulas = aulasService.listarAulasPorCursoId(cursoId);
         return ResponseEntity.ok(aulas);
     }
 
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<Aulas> cadastrarAula(@RequestBody Aulas aula) {
         Aulas novaAula = aulasService.cadastrarAula(aula);
@@ -35,6 +38,7 @@ public class AulasController {
         return ResponseEntity.status(HttpStatus.CREATED).body(novaAula);
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Aulas> pegarAulaPorId(@PathVariable Long id) {
         try {
@@ -45,6 +49,7 @@ public class AulasController {
         }
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<Aulas> atualizarAula(@PathVariable Long id, @RequestBody Aulas aula) {
         try {
@@ -55,6 +60,7 @@ public class AulasController {
         }
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarAula(@PathVariable Long id) {
         try {
