@@ -83,7 +83,7 @@ public class CursosController {
 
     @CrossOrigin
     @GetMapping("/listar/{id}")
-    public ResponseEntity<List<?>> listarCursosPorEmpresa(Long empresas) {
+    public ResponseEntity<List<CursosDTOExibicao>> listarCursosPorEmpresa(Long empresas) {
         try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 

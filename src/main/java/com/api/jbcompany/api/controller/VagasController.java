@@ -36,7 +36,8 @@ public class VagasController {
 
         List<VagasDTOExibicaoComEmpresa> listaVagasExibicao = vagas.stream()
                 .map(vaga -> new VagasDTOExibicaoComEmpresa(vaga.getId(), vaga.getEmpresas().getNome(),
-                        vaga.getDescricao(), vaga.getLocalizacao(), vaga.getFuncao(), vaga.getSalario()))
+                        vaga.getDescricao(), vaga.getLocalizacao(), vaga.getFuncao(), vaga.getSalario(),
+                        vaga.isStatus_vaga()))
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(listaVagasExibicao);
@@ -55,7 +56,8 @@ public class VagasController {
 
         VagasDTOExibicao exibirVaga = new VagasDTOExibicao(vagaCadastrada.getId(), vagaCadastrada.getDescricao(),
                 vaga.getCep(),
-                vagaCadastrada.getLocalizacao(), vagaCadastrada.getFuncao(), vagaCadastrada.getSalario());
+                vagaCadastrada.getLocalizacao(), vagaCadastrada.getFuncao(), vagaCadastrada.getSalario(),
+                vagaCadastrada.isStatus_vaga());
 
         return ResponseEntity.ok(exibirVaga);
 
@@ -69,7 +71,7 @@ public class VagasController {
             VagasDTOExibicaoComEmpresa vagaExibir = new VagasDTOExibicaoComEmpresa(vaga.getId(),
                     vaga.getEmpresas().getNome(),
                     vaga.getDescricao(),
-                    vaga.getLocalizacao(), vaga.getFuncao(), vaga.getSalario());
+                    vaga.getLocalizacao(), vaga.getFuncao(), vaga.getSalario(), vaga.isStatus_vaga());
 
             return ResponseEntity.ok(vagaExibir);
         } catch (RuntimeException ex) {
@@ -85,7 +87,8 @@ public class VagasController {
 
             VagasDTOExibicao vagaExibicao = new VagasDTOExibicao(vagaAtualizada.getId(), vagaAtualizada.getDescricao(),
                     vagaAtualizada.getCep(),
-                    vagaAtualizada.getLocalizacao(), vagaAtualizada.getFuncao(), vagaAtualizada.getSalario());
+                    vagaAtualizada.getLocalizacao(), vagaAtualizada.getFuncao(), vagaAtualizada.getSalario(),
+                    vagaAtualizada.isStatus_vaga());
 
             return ResponseEntity.ok(vagaExibicao);
         } catch (RuntimeException ex) {
@@ -119,7 +122,7 @@ public class VagasController {
                     .map(vaga -> new VagasDTOExibicao(vaga.getId(), vaga.getDescricao(), vaga.getCep(),
                             vaga.getLocalizacao(),
                             vaga.getFuncao(),
-                            vaga.getSalario()))
+                            vaga.getSalario(), vaga.isStatus_vaga()))
                     .collect(Collectors.toList());
 
             return ResponseEntity.ok().body(listaVagas);
