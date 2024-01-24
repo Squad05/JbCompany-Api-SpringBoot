@@ -2,8 +2,12 @@ package com.api.jbcompany.api.controller;
 
 import java.util.List;
 
+import com.api.jbcompany.api.dto.AulaDTO;
 import com.api.jbcompany.api.model.Aulas;
+import com.api.jbcompany.api.model.Cursos;
 import com.api.jbcompany.api.service.AulasService;
+import com.api.jbcompany.api.service.CursosService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +19,9 @@ public class AulasController {
 
     @Autowired
     private AulasService aulasService;
+
+    @Autowired
+    private CursosService cursosService;
 
     @CrossOrigin
     @GetMapping
@@ -32,10 +39,18 @@ public class AulasController {
 
     @CrossOrigin
     @PostMapping
-    public ResponseEntity<Aulas> cadastrarAula(@RequestBody Aulas aula) {
-        Aulas novaAula = aulasService.cadastrarAula(aula);
+    public ResponseEntity<Aulas> cadastrarAula(@RequestBody AulaDTO aula) {
+        Cursos buscarCurso = cursosService.pegarCursoPorId(aula.curso());
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(novaAula);
+        Aulas novaAula = new Aulas();
+        novaAula.setCurso(buscarCurso);
+        novaAula.setDescricao(aula.descricao());
+        novaAula.setLink(aula.link());
+        novaAula.setTitulo(aula.titulo());
+
+        Aulas aulaAdicionada = aulasService.cadastrarAula(novaAula);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(aulaAdicionada);
     }
 
     @CrossOrigin
