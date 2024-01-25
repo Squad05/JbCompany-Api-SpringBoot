@@ -43,6 +43,8 @@ public class CursosServiceImpl implements CursosService {
             cursoExistente.setMateria(cursoAtualizado.getMateria());
             cursoExistente.setDuracao(cursoAtualizado.getDuracao());
             cursoExistente.setDescricao(cursoAtualizado.getDescricao());
+            cursoExistente.setCategoria(cursoAtualizado.getCategoria());
+
             return cursosRepository.save(cursoExistente);
         } else {
             throw new RuntimeException("Curso com ID " + id + " não encontrado para atualização.");

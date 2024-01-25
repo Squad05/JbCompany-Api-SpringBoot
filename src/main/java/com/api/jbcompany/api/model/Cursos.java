@@ -21,12 +21,15 @@ public class Cursos {
     private String duracao;
     private String descricao;
 
-    public Cursos(Long id, Usuarios empresas, String materia, String duracao, String descricao) {
+    private String categoria;
+
+    public Cursos(Long id, Usuarios empresas, String materia, String duracao, String descricao, String categoria) {
         this.id = id;
         this.empresas = empresas;
         this.materia = materia;
         this.duracao = duracao;
         this.descricao = descricao;
+        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -67,6 +70,14 @@ public class Cursos {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public Cursos() {
