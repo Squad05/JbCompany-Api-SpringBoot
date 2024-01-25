@@ -5,11 +5,9 @@ import java.util.List;
 import com.api.jbcompany.api.model.Candidaturas;
 
 public interface CandidaturasService {
-    List<Candidaturas> listarCandidaturas();
+    List<Candidaturas> listarCandidaturasPorVagaId(Long vagaId);
 
     Candidaturas cadastrarCandidatura(Candidaturas Candidatura);
-
-    Candidaturas atualizarCandidatura(Long id, Candidaturas CandidaturaAtualizado);
 
     void deletarCandidatura(Long id);
 

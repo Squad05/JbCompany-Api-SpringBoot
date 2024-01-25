@@ -1,6 +1,7 @@
 package com.api.jbcompany.api.servicesImpl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,28 +18,8 @@ public class CandidaturasServiceImpl implements CandidaturasService {
     private CandidaturasRepository candidaturasRepository;
 
     @Override
-    public List<Candidaturas> listarCandidaturas() {
-        return candidaturasRepository.findAll();
-    }
-
-    @Override
     public Candidaturas cadastrarCandidatura(Candidaturas candidatura) {
         return candidaturasRepository.save(candidatura);
-    }
-
-    @Override
-    public Candidaturas atualizarCandidatura(Long id, Candidaturas candidaturaAtualizada) {
-        Optional<Candidaturas> optionalCandidatura = candidaturasRepository.findById(id);
-
-        if (optionalCandidatura.isPresent()) {
-            Candidaturas candidatura = optionalCandidatura.get();
-            candidatura.setUsuarios(candidaturaAtualizada.getUsuarios());
-            candidatura.setVagas(candidaturaAtualizada.getVagas());
-
-            return candidaturasRepository.save(candidatura);
-        } else {
-            throw new RuntimeException("Candidatura com ID " + id + " não encontrado para atualização.");
-        }
     }
 
     @Override
@@ -48,6 +29,13 @@ public class CandidaturasServiceImpl implements CandidaturasService {
 
     @Override
     public Candidaturas pegarCandidaturaPorId(Long id) {
-        return candidaturasRepository.findById(id).orElse(null);
+        Optional<Candidaturas> candidatura = candidaturasRepository.findById(id);
+        return candidatura.orElseThrow(() -> new NoSuchElementException("Candidatura não encontrada com o ID: " + id));
     }
+
+    @Override
+    public List<Candidaturas> listarCandidaturasPorVagaId(Long vagaId) {
+        return candidaturasRepository.findByVagasId(vagaId);
+    }
+
 }

@@ -8,7 +8,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Id;
 
 @Entity
-public class Candidaturas {
+public class CandidaturaCurso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,14 +18,18 @@ public class Candidaturas {
     private String candidataNome;
 
     @ManyToOne
-    @JoinColumn(name = "vaga_id")
-    private Vagas vagas;
+    @JoinColumn(name = "curso_id")
+    private Cursos cursos;
 
-    public Candidaturas(Long id, String candidataEmail, String candidataNome, Vagas vagas) {
+    public CandidaturaCurso() {
+
+    }
+
+    public CandidaturaCurso(Long id, String candidataEmail, String candidataNome, Cursos cursos) {
         this.id = id;
         this.candidataEmail = candidataEmail;
         this.candidataNome = candidataNome;
-        this.vagas = vagas;
+        this.cursos = cursos;
     }
 
     public Long getId() {
@@ -52,16 +56,12 @@ public class Candidaturas {
         this.candidataNome = candidataNome;
     }
 
-    public Vagas getVagas() {
-        return vagas;
+    public Cursos getCursos() {
+        return cursos;
     }
 
-    public void setVagas(Vagas vagas) {
-        this.vagas = vagas;
-    }
-
-    public Candidaturas() {
-
+    public void setCursos(Cursos cursos) {
+        this.cursos = cursos;
     }
 
 }

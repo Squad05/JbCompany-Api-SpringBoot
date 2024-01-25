@@ -19,18 +19,16 @@ public class CandidaturasController {
     @Autowired
     private CandidaturasService candidaturasService;
 
-    @GetMapping
-    public ResponseEntity<List<Candidaturas>> listarCandidaturas() {
-        List<Candidaturas> candidaturas = candidaturasService.listarCandidaturas();
+    @GetMapping("/listar/{vagaId}")
+    public ResponseEntity<List<Candidaturas>> listarCandidaturasPorVagaId(@PathVariable Long vagaId) {
+        List<Candidaturas> candidaturas = candidaturasService.listarCandidaturasPorVagaId(vagaId);
         return ResponseEntity.ok(candidaturas);
     }
 
     @PostMapping
-    public ResponseEntity<?> cadastrarCandidatura(@RequestBody Candidaturas candidatura) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
+    public ResponseEntity<Candidaturas> cadastrarCandidatura(@RequestBody Candidaturas candidatura) {
         Candidaturas novaCandidatura = candidaturasService.cadastrarCandidatura(candidatura);
-        return ResponseEntity.status(HttpStatus.CREATED).body(auth);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novaCandidatura);
     }
 
     @GetMapping("/{id}")
@@ -38,17 +36,6 @@ public class CandidaturasController {
         try {
             Candidaturas candidatura = candidaturasService.pegarCandidaturaPorId(id);
             return ResponseEntity.ok(candidatura);
-        } catch (RuntimeException ex) {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Candidaturas> atualizarCandidatura(@PathVariable Long id,
-            @RequestBody Candidaturas candidatura) {
-        try {
-            Candidaturas candidaturaAtualizada = candidaturasService.atualizarCandidatura(id, candidatura);
-            return ResponseEntity.ok(candidaturaAtualizada);
         } catch (RuntimeException ex) {
             return ResponseEntity.notFound().build();
         }

@@ -9,5 +9,6 @@ import com.api.jbcompany.api.model.Candidaturas;
 
 @Repository
 public interface CandidaturasRepository extends JpaRepository<Candidaturas, Long> {
+    List<Candidaturas> findByVagasId(Long vagaId);
 
 }
