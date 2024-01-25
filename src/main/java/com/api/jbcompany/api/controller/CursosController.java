@@ -93,7 +93,7 @@ public class CursosController {
 
             List<CursosDTOExibicao> listaCursos = cursosPorEmpresa.stream()
                     .map(curso -> new CursosDTOExibicao(curso.getId(), curso.getMateria(), curso.getDescricao(),
-                            curso.getDuracao()))
+                            curso.getDuracao(), curso.getCategoria()))
                     .collect(Collectors.toList());
 
             return ResponseEntity.ok().body(listaCursos);
