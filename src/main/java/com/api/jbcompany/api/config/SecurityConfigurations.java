@@ -28,6 +28,7 @@ public class SecurityConfigurations {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.GET, "/vagas").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/cursos").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/logar").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/cadastrar").permitAll()
                         .anyRequest().authenticated())
