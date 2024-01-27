@@ -104,6 +104,7 @@ public class UsuarioController {
         Usuarios usuario = usuarioExistente;
 
         usuario.setNome(data.nome());
+        usuario.setEmail(data.email());
         usuario.setArea_de_atuacao(data.area_de_atuacao());
         usuario.setDescricao(data.descricao());
 
