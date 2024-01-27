@@ -29,6 +29,7 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.GET, "/vagas").permitAll()
                         .requestMatchers(HttpMethod.GET, "/cursos").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/aulas").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/logar").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/cadastrar").permitAll()
                         .anyRequest().authenticated())
