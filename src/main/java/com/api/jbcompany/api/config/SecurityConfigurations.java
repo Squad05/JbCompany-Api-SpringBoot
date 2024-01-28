@@ -30,6 +30,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/vagas").permitAll()
                         .requestMatchers(HttpMethod.GET, "/cursos").permitAll()
                         .requestMatchers(HttpMethod.GET, "/aulas").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/aulas/*").permitAll()
                         .requestMatchers(HttpMethod.GET, "/cursos/*").permitAll()
                         .requestMatchers(HttpMethod.GET, "/aulas/curso/*").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/logar").permitAll()
