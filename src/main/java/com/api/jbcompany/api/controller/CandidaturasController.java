@@ -19,18 +19,21 @@ public class CandidaturasController {
     @Autowired
     private CandidaturasService candidaturasService;
 
+    @CrossOrigin
     @GetMapping("/listar/{vagaId}")
     public ResponseEntity<List<Candidaturas>> listarCandidaturasPorVagaId(@PathVariable Long vagaId) {
         List<Candidaturas> candidaturas = candidaturasService.listarCandidaturasPorVagaId(vagaId);
         return ResponseEntity.ok(candidaturas);
     }
 
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<Candidaturas> cadastrarCandidatura(@RequestBody Candidaturas candidatura) {
         Candidaturas novaCandidatura = candidaturasService.cadastrarCandidatura(candidatura);
         return ResponseEntity.status(HttpStatus.CREATED).body(novaCandidatura);
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Candidaturas> pegarCandidaturaPorId(@PathVariable Long id) {
         try {
@@ -41,6 +44,7 @@ public class CandidaturasController {
         }
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarCandidatura(@PathVariable Long id) {
         try {
