@@ -90,7 +90,6 @@ Se você gostaria de contribuir para este projeto, sinta-se à vontade para abri
           <sub><b>Guilherme</b></sub>
         </a>
       </td>
-     
     </tr>
   </tbody>
 </table>
