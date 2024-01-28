@@ -37,8 +37,12 @@ Se você gostaria de contribuir para este projeto, sinta-se à vontade para abri
     <td>Java</td>
     <td>SpringBoot API</td>
     <td>VSCode</td>
+    <td>Git</td>
+    <td>GitHub</td>
   </tr>
   <tr> 
+    <td></td>
+    <td></td>
     <td></td>
     <td></td>
     <td></td>
