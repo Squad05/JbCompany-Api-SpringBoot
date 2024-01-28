@@ -56,6 +56,8 @@ Se você gostaria de contribuir para este projeto, sinta-se à vontade para abri
   </tr>
 </table>
 
+## Equipe de desenvolvedores:
+
 <table>
   <tbody>
     <tr>
