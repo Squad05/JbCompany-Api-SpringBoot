@@ -11,4 +11,6 @@ import com.api.jbcompany.api.model.Candidaturas;
 public interface CandidaturasRepository extends JpaRepository<Candidaturas, Long> {
     List<Candidaturas> findByVagasId(Long vagaId);
 
+    int countByCandidataEmail(String email);
+
 }

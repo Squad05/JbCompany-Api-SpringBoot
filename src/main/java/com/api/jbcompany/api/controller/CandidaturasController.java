@@ -79,4 +79,11 @@ public class CandidaturasController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @CrossOrigin
+    @GetMapping("/contar/{email}")
+    public ResponseEntity<Integer> contarCandidaturasPorEmail(@PathVariable String email) {
+        int totalCandidaturas = candidaturasService.contarCandidaturasPorEmail(email);
+        return ResponseEntity.ok(totalCandidaturas);
+    }
 }

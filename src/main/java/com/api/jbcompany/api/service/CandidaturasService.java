@@ -13,4 +13,6 @@ public interface CandidaturasService {
 
     Candidaturas pegarCandidaturaPorId(Long id);
 
+    int contarCandidaturasPorEmail(String email);
+
 }

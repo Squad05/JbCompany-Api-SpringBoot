@@ -38,4 +38,9 @@ public class CandidaturasServiceImpl implements CandidaturasService {
         return candidaturasRepository.findByVagasId(vagaId);
     }
 
+    @Override
+    public int contarCandidaturasPorEmail(String email) {
+        return candidaturasRepository.countByCandidataEmail(email);
+    }
+
 }
