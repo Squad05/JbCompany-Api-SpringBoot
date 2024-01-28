@@ -2,7 +2,11 @@ package com.api.jbcompany.api.controller;
 
 import com.api.jbcompany.api.model.Candidaturas;
 import com.api.jbcompany.api.model.Usuarios;
+import com.api.jbcompany.api.model.Vagas;
 import com.api.jbcompany.api.service.CandidaturasService;
+import com.api.jbcompany.api.service.EmailService;
+import com.api.jbcompany.api.service.VagasService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.http.HttpStatus;
@@ -10,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/candidaturas")
@@ -18,6 +24,12 @@ public class CandidaturasController {
 
     @Autowired
     private CandidaturasService candidaturasService;
+
+    @Autowired
+    private VagasService vagasService;
+
+    @Autowired
+    private EmailService emailService;
 
     @CrossOrigin
     @GetMapping("/listar/{vagaId}")
@@ -30,6 +42,19 @@ public class CandidaturasController {
     @PostMapping
     public ResponseEntity<Candidaturas> cadastrarCandidatura(@RequestBody Candidaturas candidatura) {
         Candidaturas novaCandidatura = candidaturasService.cadastrarCandidatura(candidatura);
+
+        if (candidatura.getVagas() != null) {
+            Map<String, Object> propriedades = new HashMap<>();
+            propriedades.put("nome", candidatura.getCandidataNome());
+            Vagas vagaAssociada = vagasService.pegarVagasPorId(candidatura.getVagas().getId());
+
+            propriedades.put("funcaoCandidatura", vagaAssociada.getFuncao());
+
+            emailService.enviarEmailCandididatura(candidatura.getCandidataEmail(),
+                    "Sua candidatura foi recebida com sucesso!",
+                    propriedades);
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(novaCandidatura);
     }
 
