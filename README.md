@@ -5,7 +5,7 @@
 </p>
 </div>
 
-> Status: Concluído
+> Status: Em revisão
 
 ### Esta é uma aplicação API Spring Boot para oportunidades de emprego e cursos.
 
@@ -24,7 +24,8 @@ Funcionalidades: Cadastrar vagas, cursos, acessar perfil, ver quantidade de mulh
 
 ### 1ª Opção - Deploy do Front Consumindo esta API:
 1. Acesse: [JbCompany Frontend](https://jbcompany.vercel.app/)
-2. Repositório do Frontend: [JbCompany Frontend Repo](https://github.com/Squad05/jbcompany-next-front)
+
+Obs: Repositório do Frontend: [JbCompany Frontend Repo](https://github.com/Squad05/jbcompany-next-front)
 
 ### 2ª Opção - Deploy da API:
 1. Abra o arquivo do Insomnia.
@@ -51,28 +52,26 @@ Se você gostaria de contribuir para este projeto, sinta-se à vontade para abri
     <td><img src="https://img.icons8.com/color/48/000000/java-coffee-cup-logo.png" alt="Java" /></td>
     <td><img src="https://img.icons8.com/color/48/000000/spring-logo.png" alt="Spring Boot" /></td>
     <td><img src="https://img.icons8.com/color/48/000000/visual-studio-code-2019.png" alt="VSCode" /></td>
-    <td><img src="https://img.icons8.com/color/48/000000/git.png" alt="Git" /></td>
-    <td><img src="https://img.icons8.com/color/48/000000/github.png" alt="GitHub" /></td>
   </tr>
 </table>
 
-## Equipe de desenvolvedores:
+## Equipe de desenvolvedores e idealizadores:
 
 <table>
   <tbody>
     <tr>
       <td align="center" valign="top" width="20%">
-        <a href="https://github.com/MeDourado">
-          <img src="https://avatars.githubusercontent.com/u/99136551?v=4" width="100px;" alt="Eduarda's Photo">
-          <br />
-          <sub><b>Maria Dourado</b></sub>
-        </a>
-      </td>
-      <td align="center" valign="top" width="20%">
         <a href="https://github.com/1Jeferson">
           <img src="https://avatars.githubusercontent.com/u/120865777?v=4" width="100px;" alt="Jeferson's Photo">
           <br />
           <sub><b>Jeferson Ribeiro</b></sub>
+        </a>
+      </td>
+           <td align="center" valign="top" width="20%">
+        <a href="https://github.com/MeDourado">
+          <img src="https://avatars.githubusercontent.com/u/99136551?v=4" width="100px;" alt="Eduarda's Photo">
+          <br />
+          <sub><b>Maria Dourado</b></sub>
         </a>
       </td>
             <td align="center" valign="top" width="20%">
