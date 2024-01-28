@@ -6,7 +6,7 @@
 
 ## O que é o projeto?
 
-O JobCompani é uma rede social que visa oferecer oportunidades iguais e representatividade no mercado de trabalho para mulheres LGBTQA+.
+O JobCompany é uma rede social que visa oferecer oportunidades iguais e representatividade no mercado de trabalho para mulheres LGBTQA+.
 
 ## Descrição do projeto:
 
@@ -17,18 +17,17 @@ O projeto tem como objetivo ser um elo de ligação entre as mulheres LGBT que e
 + comunicação acertiva;
 + indicações de cursos para o aprimoramento profissional.
 
-
 ## Como baixar e iniciar?
 
-Para acessar a rede social JobDelas basta que você baixe o app na celular ou desktop, fazer seu cadastro de login e iniciar sua navegação incerindo sua oportunidade de trabalho para que as mulheres LGBT possam acessar.
-
-## Como contribuir?
-
-Para contribuir com o JobDelas você pode participar do bate-papo e trocar experiências e informações com outras participantes. Também pode fazer indicação de cursos e de vagas de emprego na própria plataforma. 
+Para acessar a rede social JobCompany basta que você baixe o app no celular ou desktop, fazer seu cadastro de login e iniciar sua navegação incerindo sua oportunidade de trabalho para que as mulheres LGBT possam acessar. 
 
 ## Funcionalidades:
 
 ?
+
+## Como Contribuir:
+
+Se você gostaria de contribuir para este projeto, sinta-se à vontade para abrir um "fork" ou enviar um "pull request".
 
 ## Tecnologias utilizadas:
 
@@ -46,5 +45,22 @@ Para contribuir com o JobDelas você pode participar do bate-papo e trocar exper
     <td></td>
   </tr>
 </table>
+
+## Equipe de desenvolvimento 
+
+[Guilherme B. de Oliveira](https://github.com/guidev1989) 
+
+[Grasielly Dias Apolinário](https://github.com/Grasielly84)
+
+[Guilherme Augusto Pinto](https://github.com/GuilhermeAugust0)
+
+[Hellen dos Santos Ferreira](https://github.com/HellenS95) 
+
+[Jeferson Ribeiro da Silva](https://github.com/1Jeferson) 
+
+[Maria Eduarda Santos Dourado](https://github.com/MeDourado) 
+
+
+
 
 
