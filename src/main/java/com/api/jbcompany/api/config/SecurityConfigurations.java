@@ -39,7 +39,6 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/auth/cadastrar").permitAll()
                         .requestMatchers(HttpMethod.POST, "/candidaturas").permitAll()
                         .requestMatchers(HttpMethod.POST, "/candidaturas-cursos").permitAll()
-
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
