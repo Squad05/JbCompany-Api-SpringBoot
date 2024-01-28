@@ -36,4 +36,11 @@ public class CandidaturaCursoController {
         CandidaturaCurso novaCandidaturaCurso = candidaturaCursoService.cadastrarCandidatura(candidaturaCurso);
         return ResponseEntity.status(HttpStatus.CREATED).body(novaCandidaturaCurso);
     }
+
+    @CrossOrigin
+    @GetMapping("/contar/{email}")
+    public ResponseEntity<Integer> contarCandidaturasPorEmail(@PathVariable String email) {
+        int totalCandidaturas = candidaturaCursoService.contarCandidaturasCursoPorEmail(email);
+        return ResponseEntity.ok(totalCandidaturas);
+    }
 }

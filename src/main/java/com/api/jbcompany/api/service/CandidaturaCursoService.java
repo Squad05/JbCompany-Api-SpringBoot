@@ -10,4 +10,5 @@ public interface CandidaturaCursoService {
 
     CandidaturaCurso cadastrarCandidatura(CandidaturaCurso candidaturaCurso);
 
+    int contarCandidaturasCursoPorEmail(String email);
 }

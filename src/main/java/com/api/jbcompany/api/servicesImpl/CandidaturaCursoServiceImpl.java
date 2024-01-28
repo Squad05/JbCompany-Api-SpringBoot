@@ -24,4 +24,10 @@ public class CandidaturaCursoServiceImpl implements CandidaturaCursoService {
     public CandidaturaCurso cadastrarCandidatura(CandidaturaCurso candidaturaCurso) {
         return candidaturaCursoRepository.save(candidaturaCurso);
     }
+
+    @Override
+    public int contarCandidaturasCursoPorEmail(String email) {
+        return candidaturaCursoRepository.countByCandidataEmail(email);
+    }
+
 }

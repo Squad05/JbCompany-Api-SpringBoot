@@ -10,4 +10,6 @@ import com.api.jbcompany.api.model.CandidaturaCurso;
 @Repository
 public interface CandidaturaCursoRepository extends JpaRepository<CandidaturaCurso, Long> {
     List<CandidaturaCurso> findByCursosId(Long cursoId);
+
+    int countByCandidataEmail(String email);
 }
