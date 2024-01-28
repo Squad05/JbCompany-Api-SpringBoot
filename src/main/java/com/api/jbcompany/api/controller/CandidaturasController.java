@@ -5,6 +5,7 @@ import com.api.jbcompany.api.model.Usuarios;
 import com.api.jbcompany.api.model.Vagas;
 import com.api.jbcompany.api.service.CandidaturasService;
 import com.api.jbcompany.api.service.EmailService;
+import com.api.jbcompany.api.service.UsuariosService;
 import com.api.jbcompany.api.service.VagasService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class CandidaturasController {
 
     @Autowired
     private CandidaturasService candidaturasService;
+
+    @Autowired
+    private UsuariosService usuariosService;
 
     @Autowired
     private VagasService vagasService;
@@ -86,4 +90,25 @@ public class CandidaturasController {
         int totalCandidaturas = candidaturasService.contarCandidaturasPorEmail(email);
         return ResponseEntity.ok(totalCandidaturas);
     }
+
+    @CrossOrigin
+    @GetMapping("/contarPorEmpresa")
+    public ResponseEntity<?> contarCandidaturasPorEmpresa() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null) {
+            Usuarios usuario = usuariosService.encontrarUsuarioPorEmail(auth.getName());
+
+            if (usuario != null && usuario.getId() != null) {
+                Long empresaId = usuario.getId();
+                int totalCandidaturas = candidaturasService.contarCandidaturasPorEmpresa(empresaId);
+                return ResponseEntity.ok().body(totalCandidaturas);
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário ou empresaId ausente.");
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário não autenticado.");
+        }
+    }
+
 }

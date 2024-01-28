@@ -43,4 +43,8 @@ public class CandidaturasServiceImpl implements CandidaturasService {
         return candidaturasRepository.countByCandidataEmail(email);
     }
 
+    @Override
+    public int contarCandidaturasPorEmpresa(Long empresaId) {
+        return candidaturasRepository.countByVagasEmpresasId(empresaId);
+    }
 }

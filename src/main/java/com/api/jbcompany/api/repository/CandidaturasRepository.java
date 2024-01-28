@@ -13,4 +13,6 @@ public interface CandidaturasRepository extends JpaRepository<Candidaturas, Long
 
     int countByCandidataEmail(String email);
 
+    int countByVagasEmpresasId(Long empresaId);
+
 }

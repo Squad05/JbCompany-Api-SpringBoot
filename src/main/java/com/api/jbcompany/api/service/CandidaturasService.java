@@ -15,4 +15,5 @@ public interface CandidaturasService {
 
     int contarCandidaturasPorEmail(String email);
 
+    int contarCandidaturasPorEmpresa(Long empresaId);
 }
