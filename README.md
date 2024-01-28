@@ -1,6 +1,9 @@
-<p style="text-align: center;">
-  <img src="https://github.com/Squad05/JbCompany-Api-SpringBoot/assets/129866444/7f00e0d2-8eff-40b2-a44d-5d7848edcaf3" width="100">
+<div align="center">
+ <a href="https://github.com/Squad05/JbCompany-Api-SpringBoot">
+    <img src="https://github.com/Squad05/JbCompany-Api-SpringBoot/assets/129866444/7f00e0d2-8eff-40b2-a44d-5d7848edcaf3" alt="logo-jbcompany" width="150" >
+  </a>
 </p>
+</div>
 
 > Status: Concluído
 
