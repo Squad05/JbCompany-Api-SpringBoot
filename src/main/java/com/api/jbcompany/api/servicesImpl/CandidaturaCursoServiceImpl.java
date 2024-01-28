@@ -30,4 +30,9 @@ public class CandidaturaCursoServiceImpl implements CandidaturaCursoService {
         return candidaturaCursoRepository.countByCandidataEmail(email);
     }
 
+    @Override
+    public int contarCandidaturasCursoPorEmpresa(Long empresaId) {
+        return candidaturaCursoRepository.countByCursosEmpresasId(empresaId);
+    }
+
 }

@@ -12,4 +12,6 @@ public interface CandidaturaCursoRepository extends JpaRepository<CandidaturaCur
     List<CandidaturaCurso> findByCursosId(Long cursoId);
 
     int countByCandidataEmail(String email);
+
+    int countByCursosEmpresasId(Long empresaId);
 }
