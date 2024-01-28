@@ -52,8 +52,6 @@ Se você gostaria de contribuir para este projeto, sinta-se à vontade para abri
     <td><img src="https://img.icons8.com/color/48/000000/java-coffee-cup-logo.png" alt="Java" /></td>
     <td><img src="https://img.icons8.com/color/48/000000/spring-logo.png" alt="Spring Boot" /></td>
     <td><img src="https://img.icons8.com/color/48/000000/visual-studio-code-2019.png" alt="VSCode" /></td>
-    <td><img src="https://img.icons8.com/color/48/000000/git.png" alt="Git" /></td>
-    <td><img src="https://img.icons8.com/color/48/000000/github.png" alt="GitHub" /></td>
   </tr>
 </table>
 
